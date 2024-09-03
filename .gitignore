@@ -1,1 +1,4 @@
+.direnv/
+
+# Ignore compiled pdf
 *.pdf
