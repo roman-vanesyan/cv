@@ -3,7 +3,7 @@ name: CV Preview
 on:
   pull_request:
     paths:
-      - "cv/**"
+      - "**.typ"
 
 jobs:
   build-and-preview:
