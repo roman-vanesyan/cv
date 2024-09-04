@@ -148,18 +148,21 @@ content-section(
         "Senior Software Engineer",
         "Bolt",
         [
-            I'm a member of the Billing Platform team.
-            I worked on several foundational financial projects, including the Invoicing Platform, Financial Ledger, and Subscription Service.
-            These projects involve managing dozens of high load components in a distributed environment.
+            I'm currently working at a mobility company serving over 200 million customers worldwide.
+            As a member of the Billing Platform team, I have contributed to several foundational financial projects, including the Invoicing Platform, Financial Ledger, and Subscription Service.
+            These projects involve managing dozens of high-load components in a distributed environment.
         ],
         "08/2021 - Now",
         [Led Billing for Food Delivery team],
-        [Played a key role in supporting the Euro migration in Croatia from a billing perspective. Designed and implemented a real-time solution to convert customer balances on Bolt's platform to Euros without downtime]
+        [Played a key role in supporting the Euro migration in Croatia from a billing perspective. Designed and implemented a real-time solution to convert customer balances to Euros without downtime]
     ),
     experience-item(
         "Software Engineer",
         "Sophos Factory (formerly Refactr, Inc.)",
-        "I was a key member of a dedicated team of three engineers, working on various layers of the platform, including API, Runner Agent, and Pipeline Visual Editor.",
+        [
+            I was a key member of a dedicated team of three engineers working on a CI platform.
+            My role involved contributing to various layers of the platform, including the API, Runner Agent, and Pipeline Visual Editor.
+        ],
         "07/2020 - 07/2021",
         [Led the development of the first CLI version to interact with the platform],
         [Designed and implemented a custom expression evaluating engine (DSL) for CI pipeline variables],
@@ -169,11 +172,11 @@ content-section(
     experience-item(
         "Software Engineer",
         "EPAM Systems",
-        "I worked on two dedicated projects: TelescopeAI PERF, a team productivity analytics platform, and Anatha, a crypto wallet supporting major cryptocurrencies, including Bitcoin and Ethereum.",
+        "I contributed to two dedicated projects: TelescopeAI PERF, a team productivity analytics platform, and Anatha, a crypto wallet supporting major cryptocurrencies such as Bitcoin and Ethereum.",
         "08/2019 - 11/2019",
         [
-            Led development of the desktop wallet application.
-            Designed and implemented key parts of the application, including accounts creation and management, cryptocurrency exchange functionality, realtime balance retrieval
+            Led the development of the desktop wallet application.
+            Designed and implemented key features, including account creation and management, cryptocurrency exchange functionality, and real-time balance retrieval.
         ]
     )
 ),
