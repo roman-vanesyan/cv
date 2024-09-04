@@ -1,0 +1,46 @@
+name: Publish CV Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  CV_NAME: Roman Vanesyan CV
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build CV
+        run: |
+          cd cv
+          nix develop --command cv build
+          mv cv.pdf "${{ env.CV_NAME }}.pdf"
+
+      - name: Create Release and Upload Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./cv/${{ env.CV_NAME }}.pdf
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Update Latest Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Release
+          files: ./cv/${{ env.CV_NAME }}.pdf
+          prerelease: false
+          draft: false

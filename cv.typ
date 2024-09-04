@@ -29,24 +29,31 @@
 }
 
 #let content-section(title, first, ..rest) = {
-    stack(dir: ttb, spacing: 0cm)[
-        #block(breakable: false)[
-            #align(left)[
-                #text(size: 1.375em, weight: "semibold", fill: color-neutral-900)[#title]
-                #box(width: 1fr, line(stroke: color-neutral-900, length: 100%))
-            ]
-            #first
+    let header = block(breakable: false, spacing: 0cm)[
+        #align(left)[
+            #text(size: 1.375em, weight: "semibold", fill: color-neutral-900)[#title]
+            #box(width: 1fr, line(stroke: color-neutral-900, length: 100%))
         ]
-        #stack(dir: ttb, spacing: 1cm, ..rest)
+        #first
     ]
+
+    if rest.pos().len() > 0 {
+        set stack(dir: ttb, spacing: 1.25cm)
+        stack(
+            header,
+            stack(..rest)
+        )
+    } else {
+        header
+    }
 }
 
 #let skills-block(..rows) = {
     table(
         columns: 2,
+        stroke: none,
         gutter: 0.5cm,
         inset: 0cm,
-        stroke: none,
         ..rows,
     )
 }
@@ -70,25 +77,21 @@
 }
 
 #let experience-item(pos, org, description, time, ..items) = {
-    block(spacing: 0cm, breakable: false)[
-        #grid(
-            columns: (1fr, auto),
-            align(left)[
-                #block(breakable: false, spacing: 0cm)[
-                    #text(weight: "semibold")[#pos] - #strong(delta: 200)[#org]
-                ]
-                #stack(
-                    dir: ttb,
-                    spacing: 0.5cm,
-                    text[#description],
-                    list(..items)
-                )
-            ],
-            align(right)[
-                #text(size: 1em)[#time]
+    grid(
+        columns: (1fr, auto),
+        align(left)[
+            #block(breakable: false, spacing: 0cm)[
+                #text(weight: "semibold")[#pos] - #strong(delta: 200)[#org]
             ]
-        )
-    ]
+            #stack(
+                dir: ttb,
+                spacing: 0.5cm,
+                text[#description],
+                list(..items)
+            )
+        ],
+        align(right)[#time]
+    )
 }
 
 // Default settings
@@ -130,16 +133,16 @@
     )
 ]
 
-// Body
-#content-section(
+#stack(dir: ttb,spacing: 1.5cm,
+content-section(
     "Skills",
     skills-block(
         ..skills-row("Languages", ..skills-langs),
         ..skills-row("Tools and Platforms", ..skills-tools)
     )
-)
+),
 
-#content-section(
+content-section(
     "Experience",
     experience-item(
         "Senior Software Engineer",
@@ -150,32 +153,37 @@
             These projects involve managing dozens of high load components in a distributed environment.
         ],
         "08/2021 - Now",
-        [Led Billing Delivery team],
+        [Led Billing for Food Delivery team],
         [Played a key role in supporting the Euro migration in Croatia from a billing perspective. Designed and implemented a real-time solution to convert customer balances on Bolt's platform to Euros without downtime]
     ),
     experience-item(
         "Software Engineer",
-        "Sophos Factory (formarly Refactr, Inc.)",
-        "I was a member of a dedicated team of three engineers, working on various layers of the platform, including the API, Runner Agent, and Pipeline Visual Editor.",
+        "Sophos Factory (formerly Refactr, Inc.)",
+        "I was a key member of a dedicated team of three engineers, working on various layers of the platform, including API, Runner Agent, and Pipeline Visual Editor.",
         "07/2020 - 07/2021",
-        [Led the development of the *first CLI version* to interact with the platform],
-        [Designed and implemented a custom *expression evaluating engine (DSL)* for CI pipeline variables],
+        [Led the development of the first CLI version to interact with the platform],
+        [Designed and implemented a custom expression evaluating engine (DSL) for CI pipeline variables],
         [Integrated dozens of tools to run "natively" in Runner Agent],
         [Set up platform's build infrastructure]
     ),
     experience-item(
         "Software Engineer",
         "EPAM Systems",
-        "",
+        "I worked on two dedicated projects: TelescopeAI PERF, a team productivity analytics platform, and Anatha, a crypto wallet supporting major cryptocurrencies, including Bitcoin and Ethereum.",
         "08/2019 - 11/2019",
+        [
+            Led development of the desktop wallet application.
+            Designed and implemented key parts of the application, including accounts creation and management, cryptocurrency exchange functionality, realtime balance retrieval
+        ]
     )
-)
+),
 
-#content-section(
+content-section(
     "Education",
     education-item(
         "Moscow State University named after M. V. Lomonosov",
         "B. Sc. in Applied Mathematics and Computer Science",
         "09/2016 - 06/2020"
     )
+)
 )
