@@ -24,14 +24,13 @@ jobs:
 
       - name: Build CV
         run: |
-          cd cv
           nix develop --command cv build
           mv cv.pdf "${{ env.CV_NAME }}.pdf"
 
       - name: Create Release and Upload Asset
         uses: softprops/action-gh-release@v2
         with:
-          files: ./cv/${{ env.CV_NAME }}.pdf
+          files: ${{ env.CV_NAME }}.pdf
           name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
@@ -41,6 +40,6 @@ jobs:
         with:
           tag_name: latest
           name: Latest Release
-          files: ./cv/${{ env.CV_NAME }}.pdf
+          files: ${{ env.CV_NAME }}.pdf
           prerelease: false
           draft: false

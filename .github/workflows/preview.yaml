@@ -3,7 +3,7 @@ name: CV Preview
 on:
   pull_request:
     paths:
-      - "**.typ"
+      - "cv/**"
 
 jobs:
   build-and-preview:
@@ -16,14 +16,13 @@ jobs:
 
       - name: Build CV
         run: |
-          cd cv
           nix develop --command cv build
 
       - name: Upload CV as artifact
         uses: actions/upload-artifact@v4
         with:
           name: cv
-          path: cv/cv.pdf
+          path: cv.pdf
 
       - name: Comment PR with artifact link
         uses: actions/github-script@v7
