@@ -16,14 +16,19 @@ jobs:
 
       - name: Build CV in PDF and PNG formats
         run: |
-          nix develop --command cv build cv.pdf pdf
-          nix develop --command cv build cv.png png
+          nix develop --command cv build
+          nix develop --command cv preview
 
-      - name: Encode PNG to base64
-        id: encode_png
+      - name: Encode PNGs to base64
+        id: encode_pngs
         run: |
-          BASE64_PNG=$(base64 -w 0 cv.png)
-          echo "base64_png=$BASE64_PNG" >> $GITHUB_OUTPUT
+          PNG_FILES=$(ls cv_*.png | sort -V)
+          BASE64_PNGS=""
+          for file in $PNG_FILES; do
+            BASE64_PNG=$(base64 -w 0 "$file")
+            BASE64_PNGS+="$file:$BASE64_PNG,"
+          done
+          echo "base64_pngs=${BASE64_PNGS%,}" >> $GITHUB_OUTPUT
 
       - name: Upload CV PDF as artifact
         uses: actions/upload-artifact@v4
@@ -36,20 +41,22 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const artifactUrl = `https://github.com/${context.repo.owner}/${context.repo.name}/actions/runs/${context.runId}`;
-            const base64Png = '${{ steps.encode_png.outputs.base64_png }}';
+            const artifactUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const base64Pngs = '${{ steps.encode_pngs.outputs.base64_pngs }}'.split(',');
 
-            const comment = `
-            ## CV Preview
+            let comment = `## CV Preview\n\n`;
 
-            ![CV Preview](data:image/png;base64,${base64Png})
+            base64Pngs.forEach((pngData) => {
+              const [filename, base64] = pngData.split(':');
+              comment += `### ${filename}\n\n`;
+              comment += `![CV Preview](data:image/png;base64,${base64})\n\n`;
+            });
 
-            [Download Full CV (PDF)](${artifactUrl})
-            `;
+            comment += `[Download Full CV (PDF)](${artifactUrl})`;
 
             github.rest.issues.createComment({
               issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.name,
               body: comment
-            })
+            });
