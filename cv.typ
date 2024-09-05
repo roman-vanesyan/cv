@@ -18,6 +18,7 @@
 
 #let skills-langs = ("TypeScript", "Go", "SQL", "Vanilla JavaScript", "Dart", "Python", "Nix", "HTML/CSS")
 #let skills-tools = ("Node.js", "MySQL", "TiDB", "Grafana", "Prometheus", "PostgresQL", "Redis", "AWS", "Docker", "React", "Tailwind CSS")
+#let skills-spoken-langs = ("English", "Russian")
 
 #let header-link(name, url, icon) = {
     link(url)[
@@ -138,7 +139,8 @@ content-section(
     "Skills",
     skills-block(
         ..skills-row("Languages", ..skills-langs),
-        ..skills-row("Tools and Platforms", ..skills-tools)
+        ..skills-row("Tools and Platforms", ..skills-tools),
+        ..skills-row("Spoken languages", ..skills-spoken-langs)
     )
 ),
 
