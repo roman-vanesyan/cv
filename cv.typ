@@ -134,61 +134,63 @@
     )
 ]
 
-#stack(dir: ttb,spacing: 1.5cm,
-content-section(
-    "Skills",
-    skills-block(
-        ..skills-row("Languages", ..skills-langs),
-        ..skills-row("Tools and Platforms", ..skills-tools),
-        ..skills-row("Spoken languages", ..skills-spoken-langs)
-    )
-),
-
-content-section(
-    "Experience",
-    experience-item(
-        "Senior Software Engineer",
-        "Bolt",
-        [
-            I'm currently working at a mobility company serving over 200 million customers worldwide.
-            As a member of the Billing Platform team, I have contributed to several foundational financial projects, including the Invoicing Platform, Financial Ledger, and Subscription Service.
-            These projects involve managing dozens of high-load components in a distributed environment.
-        ],
-        "08/2021 - Now",
-        [Led Billing for Food Delivery team],
-        [Played a key role in supporting the Euro migration in Croatia from a billing perspective. Designed and implemented a real-time solution to convert customer balances to Euros without downtime]
+#stack(
+    dir: ttb,
+    spacing: 1.5cm,
+    content-section(
+        "Skills",
+        skills-block(
+            ..skills-row("Languages", ..skills-langs),
+            ..skills-row("Tools and Platforms", ..skills-tools),
+            ..skills-row("Spoken languages", ..skills-spoken-langs)
+        )
     ),
-    experience-item(
-        "Software Engineer",
-        "Sophos Factory (formerly Refactr, Inc.)",
-        [
-            I was a key member of a dedicated team of three engineers working on a CI platform.
-            My role involved contributing to various layers of the platform, including the API, Runner Agent, and Pipeline Visual Editor.
-        ],
-        "07/2020 - 07/2021",
-        [Led the development of the first CLI version to interact with the platform],
-        [Designed and implemented a custom expression evaluating engine (DSL) for CI pipeline variables],
-        [Integrated dozens of tools to run "natively" in Runner Agent],
-        [Set up platform's build infrastructure]
-    ),
-    experience-item(
-        "Software Engineer",
-        "EPAM Systems",
-        "I contributed to two dedicated projects: TelescopeAI PERF, a team productivity analytics platform, and Anatha, a crypto wallet supporting major cryptocurrencies such as Bitcoin and Ethereum.",
-        "08/2019 - 11/2019",
-        [
-            Led the development of the desktop wallet application.
-            Designed and implemented key features, including account creation and management, cryptocurrency exchange functionality, and real-time balance retrieval.
-        ]
-    )
-),
 
-content-section(
-    "Education",
-    education-item(
-        "Moscow State University named after M. V. Lomonosov",
-        "B. Sc. in Applied Mathematics and Computer Science",
-        "09/2016 - 06/2020"
+    content-section(
+        "Experience",
+        experience-item(
+            "Senior Software Engineer",
+            "Bolt",
+            [
+                I'm currently working at a mobility company serving over 200 million customers worldwide.
+                As a member of the Billing Platform team, I have contributed to several foundational financial projects, including the Invoicing Platform, Financial Ledger, and Subscription Service.
+                These projects involve managing dozens of high-load components in a distributed environment.
+            ],
+            "08/2021 - Now",
+            [Led Billing for Food Delivery team],
+            [Played a key role in supporting the Euro migration in Croatia from a billing perspective. Designed and implemented a real-time solution to convert customer balances to Euros without downtime]
+        ),
+        experience-item(
+            "Software Engineer",
+            "Sophos Factory (formerly Refactr, Inc.)",
+            [
+                I was a key member of a dedicated team of three engineers working on a CI platform.
+                My role involved contributing to various layers of the platform, including the API, Runner Agent, and Pipeline Visual Editor.
+            ],
+            "07/2020 - 07/2021",
+            [Led the development of the first CLI version to interact with the platform],
+            [Designed and implemented a custom expression evaluating engine (DSL) for CI pipeline variables],
+            [Integrated dozens of tools to run "natively" in Runner Agent],
+            [Set up platform's build infrastructure]
+        ),
+        experience-item(
+            "Software Engineer",
+            "EPAM Systems",
+            "I contributed to two dedicated projects: TelescopeAI PERF, a team productivity analytics platform, and Anatha, a crypto wallet supporting major cryptocurrencies such as Bitcoin and Ethereum.",
+            "08/2019 - 11/2019",
+            [
+                Led the development of the desktop wallet application.
+                Designed and implemented key features, including account creation and management, cryptocurrency exchange functionality, and real-time balance retrieval.
+            ]
+        )
+    ),
+
+    content-section(
+        "Education",
+        education-item(
+            "Moscow State University named after M. V. Lomonosov",
+            "B. Sc. in Applied Mathematics and Computer Science",
+            "09/2016 - 06/2020"
+        )
     )
-)
 )
