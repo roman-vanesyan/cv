@@ -5,6 +5,10 @@ on:
     paths:
       - "**.typ"
 
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   build-and-preview:
     runs-on: ubuntu-latest
@@ -14,7 +18,7 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v22
 
-      - name: Build CV in PDF and PNG formats
+      - name: Build CV in PDF
         run: |
           nix develop --command cv build
           nix develop --command cv preview
