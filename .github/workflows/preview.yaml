@@ -19,17 +19,6 @@ jobs:
           nix develop --command cv build
           nix develop --command cv preview
 
-      - name: Encode PNGs to base64
-        id: encode_pngs
-        run: |
-          PNG_FILES=$(ls cv_*.png | sort -V)
-          BASE64_PNGS=""
-          for file in $PNG_FILES; do
-            BASE64_PNG=$(base64 -w 0 "$file")
-            BASE64_PNGS+="$file:$BASE64_PNG,"
-          done
-          echo "base64_pngs=${BASE64_PNGS%,}" >> $GITHUB_OUTPUT
-
       - name: Upload CV PDF as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -42,21 +31,31 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const artifactUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const base64Pngs = '${{ steps.encode_pngs.outputs.base64_pngs }}'.split(',');
 
-            let comment = `## CV Preview\n\n`;
+            const comment = `## CV Preview\n\n[Download Full CV (PDF)](${artifactUrl})`;
 
-            base64Pngs.forEach((pngData) => {
-              const [filename, base64] = pngData.split(':');
-              comment += `### ${filename}\n\n`;
-              comment += `![CV Preview](data:image/png;base64,${base64})\n\n`;
-            });
-
-            comment += `[Download Full CV (PDF)](${artifactUrl})`;
-
-            github.rest.issues.createComment({
-              issue_number: context.payload.pull_request.number,
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
               owner: context.repo.owner,
-              repo: context.repo.name,
-              body: comment
+              repo: context.repo.repo,
             });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' && comment.body.includes('## CV Preview')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                comment_id: botComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
