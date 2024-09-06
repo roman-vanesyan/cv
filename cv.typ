@@ -17,13 +17,13 @@
 #let profile-linkedin = "roman-vanesyan"
 
 #let skills-langs = ("TypeScript", "Go", "SQL", "Vanilla JavaScript", "Dart", "Python", "Nix", "HTML/CSS")
-#let skills-tools = ("Node.js", "MySQL", "TiDB", "Grafana", "Prometheus", "PostgresQL", "Redis", "AWS", "Docker", "React", "Tailwind CSS")
+#let skills-tools = ("Node.js", "MySQL", "TiDB", "Grafana", "Prometheus", "Kibana", "PostgresQL", "Redis", "AWS", "Kubernetes", "React")
 #let skills-spoken-langs = ("English", "Russian")
 
 #let header-link(name, url, icon) = {
     link(url)[
-        #block(spacing: 0.25cm)[
-            #box(height: 16pt, baseline: 25%)[#icon]
+        #block(spacing: 0.75em)[
+            #box(height: 1em, baseline: 25%)[#icon]
             #name
         ]
     ]
@@ -39,7 +39,7 @@
     ]
 
     if rest.pos().len() > 0 {
-        set stack(dir: ttb, spacing: 1.25cm)
+        set stack(dir: ttb, spacing: 2.5em)
         stack(
             header,
             stack(..rest)
@@ -96,7 +96,7 @@
 }
 
 // Default settings
-#set text(size: 14pt, fill: color-neutral-950, lang: "en")
+#set text(size: 12pt, fill: color-neutral-950, lang: "en")
 
 #set page(
     paper: "a4",
@@ -136,7 +136,7 @@
 
 #stack(
     dir: ttb,
-    spacing: 1.5cm,
+    spacing: 2.5em,
     content-section(
         "Skills",
         skills-block(
@@ -152,36 +152,54 @@
             "Senior Software Engineer",
             "Bolt",
             [
-                I'm currently working at a mobility company serving over 200 million customers worldwide.
-                As a member of the Billing Platform team, I have contributed to several foundational financial projects, including the Invoicing Platform, Financial Ledger, and Subscription Service.
-                These projects involve managing dozens of high-load components in a distributed environment.
+                I’m currently working at a mobility company serving over 200 million customers worldwide.
+                I manage dozens of critical, high-load components in a distributed environment.
             ],
-            "08/2021 - Now",
-            [Led Billing for Food Delivery team],
-            [Played a key role in supporting the Euro migration in Croatia from a billing perspective. Designed and implemented a real-time solution to convert customer balances to Euros without downtime]
+            "07/2023 - Now",
+            "Implemented a company-wide billing metrics dashboard, providing deep insights into services health and performance.",
+            "Profiled and optimized PDF generation service (over 300 RPS), reducing CPU usage by 20% and improving the 99th percentile response time by 8x.",
+            "Collaborating on the design and implementation of the Financial Ledger as part of a cross-functional team, handling over 5000 RPS.",
+            "Contributing to the Billing leadership team, shaping the technical vision for the Billing Platform."
         ),
         experience-item(
             "Software Engineer",
-            "Sophos Factory (formerly Refactr, Inc.)",
+            "Bolt",
             [
-                I was a key member of a dedicated team of three engineers working on a CI platform.
-                My role involved contributing to various layers of the platform, including the API, Runner Agent, and Pipeline Visual Editor.
+                I worked on Bolt Food, which serves over 6 million customers globally,
+                contributing to an annual impact of over 20 million Euros.
             ],
+            "08/2021 - 07/2023",
+            [
+                Designed and implemented a real-time solution to convert
+                hundreds of thousands of customer balances in Croatia to Euros across all business lines with zero downtime.
+            ],
+            [Optimized order processing functionality by parallelizing computation, reducing customer balance update delay time from an average of 30 seconds to 150 milliseconds.],
+            [
+                Engineered and rolled out support for a new taxation schema in Ghana within a tight timeline,
+                securing the company's operation in the country.
+            ],
+            [Served as the Technical Lead for the Billing for Delivery team.]
+        ),
+        experience-item(
+            "Software Engineer",
+            "Refactr, Inc. (acquired by Sophos Ltd.)",
+            "I was a key member of a dedicated team of three engineers working on a CI platform with over 50000 daily running jobs, contributing to various aspects of the platform.",
             "07/2020 - 07/2021",
-            [Led the development of the first CLI version to interact with the platform],
-            [Designed and implemented a custom expression evaluating engine (DSL) for CI pipeline variables],
-            [Integrated dozens of tools to run "natively" in Runner Agent],
-            [Set up platform's build infrastructure]
+            [Led the development of the first CLI version to interact with the platform.],
+            [Designed and implemented a DSL for CI pipeline variables.],
+            [Built and integrated a plugin system, incorporating over 20 tools to run natively on the platform.],
         ),
         experience-item(
             "Software Engineer",
             "EPAM Systems",
-            "I contributed to two dedicated projects: TelescopeAI PERF, a team productivity analytics platform, and Anatha, a crypto wallet supporting major cryptocurrencies such as Bitcoin and Ethereum.",
-            "08/2019 - 11/2019",
+            "I contributed to two dedicated projects: TelescopeAI PERF, a team productivity analytics platform with 15k DAU, and Anatha, a crypto wallet supporting major cryptocurrencies such as Bitcoin and Ethereum.",
+            "08/2019 - 07/2020",
             [
-                Led the development of the desktop wallet application.
-                Designed and implemented key features, including account creation and management, cryptocurrency exchange functionality, and real-time balance retrieval.
-            ]
+                Led the development of the desktop wallet application using Electron.
+                Designed and implemented key features, including account creation and management, a cryptocurrency exchange, and real-time balance retrieval.
+            ],
+            [Developed a UI design system adopted by multiple internal teams at EPAM.],
+            [Set up the desktop build infrastructure, including CI/CD pipelines, build tools, and linting.]
         )
     ),
 
