@@ -34,7 +34,24 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const artifactUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const artifactName = 'cv-pdf';
+
+            const { data: artifacts } = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
+
+            const matchArtifact = artifacts.artifacts.find((artifact) => {
+              return artifact.name == artifactName
+            });
+
+            const artifactUrl = matchArtifact ? matchArtifact.archive_download_url : null;
+
+            if (!artifactUrl) {
+              console.log('Artifact not found');
+              return;
+            }
 
             const comment = `## CV Preview\n\n[Download Full CV (PDF)](${artifactUrl})`;
 

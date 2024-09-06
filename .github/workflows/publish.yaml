@@ -5,27 +5,31 @@ on:
     tags:
       - "v*"
 
+permissions:
+  contents: write
+
 env:
-  CV_NAME: Roman Vanesyan CV
+  CV_NAME: Roman_Vanesyan_CV
 
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install Nix
         uses: cachix/install-nix-action@v27
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build CV
         run: |
           nix develop --command cv build
           mv cv.pdf "${{ env.CV_NAME }}.pdf"
+
+      - name: Upload CV PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdf
+          path: ${{ env.CV_NAME }}.pdf
 
       - name: Create Release and Upload Asset
         uses: softprops/action-gh-release@v2
