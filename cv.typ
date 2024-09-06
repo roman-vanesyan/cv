@@ -95,7 +95,10 @@
     )
 }
 
-// Default settings
+//////////////////////////////////////////////////
+// DEFAULT SETTINGS                             //
+//////////////////////////////////////////////////
+
 #set text(size: 12pt, fill: color-neutral-950, lang: "en")
 
 #set page(
@@ -115,6 +118,10 @@
     author: profile-full-name,
     title: "Curriculum Vitae"
 )
+
+//////////////////////////////////////////////////
+// CV CONTENT GOES HERE                         //
+//////////////////////////////////////////////////
 
 // Header
 #align(left)[
@@ -152,12 +159,12 @@
             "Senior Software Engineer",
             "Bolt",
             [
-                I’m currently working at a mobility company serving over 200 million customers worldwide.
-                I manage dozens of critical, high-load components in a distributed environment.
+                I’m currently working at a mobility company serving over 200 million customers worldwide,
+                managing dozens of critical high-load components in a distributed environment.
             ],
             "07/2023 - Now",
-            "Implemented a company-wide billing metrics dashboard, providing deep insights into services health and performance.",
-            "Profiled and optimized PDF generation service (over 300 RPS), reducing CPU usage by 20% and improving the 99th percentile response time by 8x.",
+            "Implemented a company-wide billing metrics dashboard, providing deep insights into service health and performance.",
+            "Profiled and optimized the PDF generation service (handling over 300 RPS), reducing CPU usage by 20% and improving the 99th percentile response time by 8x.",
             "Collaborating on the design and implementation of the Financial Ledger as part of a cross-functional team project, handling over 5000 RPS.",
             "Contributing to the Billing leadership team, shaping the technical vision for the Billing Platform."
         ),

@@ -3,3 +3,5 @@
 # Ignore compiled pdf
 *.pdf
 *.png
+
+!media/*.png
